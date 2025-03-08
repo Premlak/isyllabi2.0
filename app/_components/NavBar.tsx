@@ -491,7 +491,7 @@ export default function NavBar() {
   onOpenChange={setColl2}
   className="w-full space-y-2 rounded-lg border"
 >
-  <div className="border p-1 flex items-center justify-between space-x-4 px-4 shadow-2xl">
+  <div className="border p-1 flex items-center justify-between space-x-4 px-4 rounded-lg shadow-2xl">
     <h4 className="text-sm font-semibold">Competition Exam</h4>
     <CollapsibleTrigger asChild>
       <Button variant={"ghost"} size={"sm"} className="w-9 p-0">
