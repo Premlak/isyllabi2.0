@@ -502,7 +502,7 @@ export default function NavBar() {
   </div>
   <CollapsibleContent className="space-y-2">
     <div className="w-full overflow-x-auto">
-      <div className="flex space-x-4 flex-nowrap">
+      <div className="flex space-x-4 flex-nowrap p-2">
         {courses.length > 0 &&
           courses.map(
             (course: any) =>
