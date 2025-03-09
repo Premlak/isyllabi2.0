@@ -172,7 +172,7 @@ export default function Home() {
         body: JSON.stringify({ name, f, m, i, a }),
       });
       const data = await req.json();
-      toast(data.message);
+      if(data.message != ""){toast(data.message)};
       loadData();
       setDis(false);
       const inputElement = document.activeElement; 
