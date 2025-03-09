@@ -24,7 +24,7 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
-      <Toaster position="bottom-center" duration={3000}/>
+      <Toaster position="bottom-center" duration={5000}/>
       <body className={inter.className}>
           <Security />
           {children}
