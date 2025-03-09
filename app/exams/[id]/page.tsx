@@ -205,7 +205,7 @@ export default function Home({ params }: { params: { id: string } }) {
                                 <DialogHeader>
                                   <DialogTitle>Your Exam Overview</DialogTitle>
                                   <DialogDescription>
-                                     Passing Mraks: {passing}, You Obtained {correctAnswers} / {questions.length}
+                                    Congratulation you qulified exam. Now download your certificate from Dashboard
                                   </DialogDescription>
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">

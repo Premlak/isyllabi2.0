@@ -20,6 +20,7 @@ export default function Home({ params }: { params: { id: String } }) {
   const [mcq, setMcq] = React.useState([]);
   const [exp, setExp] = React.useState(false);
   const [topic, setTopic] = React.useState("");
+  const [prof, setProf]: any = React.useState(null);
   const { user } = useUser();
   const [con, setCont] = React.useState("Loading");
   const loadCon = async () => {
@@ -37,6 +38,8 @@ export default function Home({ params }: { params: { id: String } }) {
       if (dataTem.course.cer == true) {
         setCer(true);
       }
+      setProf(dataTem.profile);
+      console.log(dataTem);
     } else {
       toast("In-Valid Course ID");
       setTimeout(() => {
@@ -105,12 +108,13 @@ export default function Home({ params }: { params: { id: String } }) {
                       className="ml-3 shadow-black shadow-lg"
                       onClick={() => {
                         if (exp == false) {
-                          if(user){
+                          if(user && prof == true){
                             toast("Redirecting.....");
                             alert("To get certificate, you need to attempt & qualify the follwing exam. Do you want to proceed ?")
                             router.push(`/exams/${cId}`);
-                          }else{
-                            toast("Please Login to Attempt Exam");
+                          }else if(user && prof == false){
+                            toast("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
+                            router.push("/dashboard");
                           }
                         } else {
                           toast("Buy or Log-IN to Get Certificate");
@@ -346,12 +350,13 @@ export default function Home({ params }: { params: { id: String } }) {
               className="ml-3"
               onClick={() => {
                 if (exp == false) {
-                  if(user){
+                  if(user && prof == true){
                     toast("Redirecting.....");
                     alert("To get certificate, you need to attempt & qualify the follwing exam. Do you want to proceed ?")
                     router.push(`/exams/${cId}`);
-                  }else{
-                    toast("Please Login to Attempt Exam");
+                  }else if(user && prof == false){
+                    toast("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
+                    router.push("/dashboard");
                   }
                 } else {
                   toast("Buy or Log-IN to Get Certificate");

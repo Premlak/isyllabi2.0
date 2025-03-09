@@ -435,7 +435,7 @@ export default function NavBar() {
                           course.subCourses.map((subCourse: any) => (
                             <div
                               key={subCourse._id}
-                              className="flex-shrink-0 w-64 bg-slate-200 select-none space-y-1 hover:bg-slate-300 dark:hover:bg-gray-900 dark:bg-slate-800 rounded-md p-2 transition-colors"
+                              className="flex-shrink-0 w-64 bg-slate-200 select-none space-y-1 hover:bg-slate-300 dark:hover:bg-gray-900 dark:bg-slate-800 rounded-md p-2 transition-colors shadow-lg"
                             >
                               <div className="flex items-center">
                                 <Badge>Course:</Badge>

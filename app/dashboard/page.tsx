@@ -40,36 +40,36 @@ export default function Home() {
   const [a, setA] = React.useState("");
   const downloadCertificate = (course: any) => {
     const certDiv = document.createElement("div");
-certDiv.style.width = "900px";
-certDiv.style.height = "650px";
-certDiv.style.padding = "30px";
-certDiv.style.textAlign = "center";
-certDiv.style.fontFamily = "Arial, sans-serif";
-certDiv.style.border = "8px solid #6d1d1d";
-certDiv.style.background = "#fdf7f1";
-certDiv.style.color = "#4d2b1a";
-certDiv.style.borderRadius = "10px";
-certDiv.style.boxShadow = "0px 4px 15px rgba(0, 0, 0, 0.3)";
-certDiv.style.position = "relative";
-certDiv.style.display = "flex";
-certDiv.style.flexDirection = "column";
-certDiv.style.justifyContent = "space-between";
-certDiv.style.alignItems = "center";
-certDiv.style.overflow = "hidden";
+    certDiv.style.width = "900px";
+    certDiv.style.height = "650px";
+    certDiv.style.padding = "30px";
+    certDiv.style.textAlign = "center";
+    certDiv.style.fontFamily = "Arial, sans-serif";
+    certDiv.style.border = "8px solid #6d1d1d";
+    certDiv.style.background = "#fdf7f1";
+    certDiv.style.color = "#4d2b1a";
+    certDiv.style.borderRadius = "10px";
+    certDiv.style.boxShadow = "0px 4px 15px rgba(0, 0, 0, 0.3)";
+    certDiv.style.position = "relative";
+    certDiv.style.display = "flex";
+    certDiv.style.flexDirection = "column";
+    certDiv.style.justifyContent = "space-between";
+    certDiv.style.alignItems = "center";
+    certDiv.style.overflow = "hidden";
 
-// Header with Logo
-const headerDiv = document.createElement("div");
-headerDiv.style.width = "100%";
-headerDiv.style.display = "flex";
-headerDiv.style.justifyContent = "space-between";
-headerDiv.style.alignItems = "center";
-headerDiv.style.marginBottom = "10px";
+    // Header with Logo
+    const headerDiv = document.createElement("div");
+    headerDiv.style.width = "100%";
+    headerDiv.style.display = "flex";
+    headerDiv.style.justifyContent = "space-between";
+    headerDiv.style.alignItems = "center";
+    headerDiv.style.marginBottom = "10px";
 
-// Header Text (Centered)
-const headerTextDiv = document.createElement("div");
-headerTextDiv.style.flex = "1";
-headerTextDiv.style.textAlign = "center";
-headerTextDiv.innerHTML = `
+    // Header Text (Centered)
+    const headerTextDiv = document.createElement("div");
+    headerTextDiv.style.flex = "1";
+    headerTextDiv.style.textAlign = "center";
+    headerTextDiv.innerHTML = `
   <h1 style="font-size: 28px; font-weight: bold; color: #6d1d1d; margin: 0;">iSyllabi</h1>
   <p style="font-size: 14px; color: #4d2b1a; margin: 0;">
     A &nbsp;&nbsp;&nbsp;&nbsp; S &nbsp;T &nbsp;E&nbsp; P&nbsp;&nbsp;&nbsp;&nbsp;  T&nbsp; O &nbsp;W &nbsp;A&nbsp; R&nbsp; D&nbsp; S&nbsp;&nbsp;&nbsp;&nbsp;  
@@ -78,21 +78,25 @@ headerTextDiv.innerHTML = `
   </p>
 `;
 
-// Logo (Right-Aligned)
-// const logo = document.createElement("img");
-// logo.src = "./logo.jpeg";
-// logo.style.width = "100px";
-// logo.style.height = "100px";
-// logo.style.borderRadius = "50%";
-// logo.style.marginRight = "10px";
+    // Logo (Right-Aligned)
+    // const logo = document.createElement("img");
+    // logo.src = "./logo.jpeg";
+    // logo.style.width = "100px";
+    // logo.style.height = "100px";
+    // logo.style.borderRadius = "50%";
+    // logo.style.marginRight = "10px";
 
-// Append to header
-headerDiv.appendChild(headerTextDiv);
-// headerDiv.appendChild(logo);
-certDiv.appendChild(headerDiv);
+    // Append to header
+    headerDiv.appendChild(headerTextDiv);
+    // headerDiv.appendChild(logo);
+    certDiv.appendChild(headerDiv);
 
-const formattedDate = course.date.split("T")[0].split("-").reverse().join("-");
-certDiv.innerHTML += `
+    const formattedDate = course.date
+      .split("T")[0]
+      .split("-")
+      .reverse()
+      .join("-");
+    certDiv.innerHTML += `
   <h2 style="font-size: 40px; font-weight: bold; color: #6d1d1d; margin-bottom: 0;">CERTIFICATE&nbsp;&nbsp; OF&nbsp;&nbsp; INTERNSHIP</h2>
   <div style="width: 100%; border-bottom: 2px solid #6d1d1d; margin-bottom: 5px; margin-top: 0;"></div>
   <div style="width: 90%; text-align: center;">
@@ -119,18 +123,18 @@ certDiv.innerHTML += `
     </div>
   </div>
 `;
-const watermark = document.createElement("div");
-watermark.innerText = "iSyllabi";
-watermark.style.position = "absolute";
-watermark.style.top = "50%";
-watermark.style.left = "50%";
-watermark.style.transform = "translate(-50%, -50%)";
-watermark.style.fontSize = "80px";
-watermark.style.fontWeight = "bold";
-watermark.style.color = "rgba(0, 0, 0, 0.05)";
-watermark.style.zIndex = "0";
-certDiv.appendChild(watermark);
-document.body.appendChild(certDiv);
+    const watermark = document.createElement("div");
+    watermark.innerText = "iSyllabi";
+    watermark.style.position = "absolute";
+    watermark.style.top = "50%";
+    watermark.style.left = "50%";
+    watermark.style.transform = "translate(-50%, -50%)";
+    watermark.style.fontSize = "80px";
+    watermark.style.fontWeight = "bold";
+    watermark.style.color = "rgba(0, 0, 0, 0.05)";
+    watermark.style.zIndex = "0";
+    certDiv.appendChild(watermark);
+    document.body.appendChild(certDiv);
     html2canvas(certDiv).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("l", "mm", "a4");
@@ -138,7 +142,7 @@ document.body.appendChild(certDiv);
       pdf.save(`${data.user.name}-Certificate.pdf`);
       document.body.removeChild(certDiv);
     });
-  }
+  };
   const loadData = async () => {
     const request = await fetch("/api/user", {
       method: "GET",
@@ -171,6 +175,16 @@ document.body.appendChild(certDiv);
       toast(data.message);
       loadData();
       setDis(false);
+      const inputElement = document.activeElement; 
+      if (
+        inputElement.tagName === "INPUT" ||
+        inputElement.tagName === "TEXTAREA"
+      ) {
+        inputElement.blur();
+      }
+      toast(
+        "You can now apply for a certificate by visiting the course section"
+      );
     }
   };
   React.useEffect(() => {
@@ -184,18 +198,16 @@ document.body.appendChild(certDiv);
           <div className="flex justify-center items-center mx-auto w-full h-full mt-4">
             {!data.user ? (
               <>
-                <div className="m-3 text-center">
-                  Please Fill Up The Required Information By Clicking On The Button{" "}
-                </div>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant={"outline"}>Complete OnBoarding</Button>
+                    <Button variant={"outline"}>Complete Profile</Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[450px] mx-auto">
                     <DialogHeader>
                       <DialogTitle>Let Us Know You</DialogTitle>
                       <DialogDescription className="text-red-400">
-                        This Information Is Not Editable In Future & Will Be Used To Generate Your Certificate And For Your Book Purchase Address
+                        This Information Is Not Editable In Future & Will Be
+                        Used To Generate Your Certificate
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
@@ -220,14 +232,18 @@ document.body.appendChild(certDiv);
                         />
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Training Start From</Label>
+                        <Label className="text-right">
+                          Training Start From
+                        </Label>
                         <Input
                           type="date"
                           onChange={(e) => {
                             const selectedDate = new Date(e.target.value);
                             const today = new Date();
                             if (selectedDate > today) {
-                              toast("Please select a date that is not in the future.");
+                              toast(
+                                "Please select a date that is not in the future."
+                              );
                               e.target.value = "";
                             } else {
                               const formattedDate = selectedDate
@@ -239,10 +255,11 @@ document.body.appendChild(certDiv);
                           }}
                           placeholder="Enter Training Starting Date"
                         />
-
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Institute or Collage</Label>
+                        <Label className="text-right">
+                          Institute or Collage
+                        </Label>
                         <Input
                           className="col-span-3"
                           onChange={(e) => {
@@ -258,7 +275,7 @@ document.body.appendChild(certDiv);
                           onChange={(e) => {
                             setA(e.target.value);
                           }}
-                          placeholder="Used If You Order A Book"
+                          placeholder="Required For Placement Releted Events"
                         />
                       </div>
                       {/* Rest of the Input fields */}
@@ -293,7 +310,12 @@ document.body.appendChild(certDiv);
                         Disable if you don't like it
                       </p>
                     </div>
-                    <Switch checked={true} onClick={()=>toast("Unable to perform this at this time")}/>
+                    <Switch
+                      checked={true}
+                      onClick={() =>
+                        toast("Unable to perform this at this time")
+                      }
+                    />
                   </div>
                   <div>
                     <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
@@ -358,8 +380,10 @@ document.body.appendChild(certDiv);
           <div className="w-full flex justify-center items-center mx-auto h-full mt-4">
             <Card className="w-[350px] sm:max-w-350px mx-auto bg-blue-200">
               <CardHeader>
-                <CardTitle>Exam Results</CardTitle>
-                <CardDescription>Only Shown If You Quliffied Any Exam</CardDescription>
+                <CardTitle>Your Certificates</CardTitle>
+                <CardDescription>
+                  Only Shown If You Quliffied Any Exam
+                </CardDescription>
               </CardHeader>
               <CardContent className="grid gap-4">
                 <div>
@@ -378,12 +402,14 @@ document.body.appendChild(certDiv);
                             <p className="text-sm text-muted-foreground">
                               <div className="flex justify-between mt-2">
                                 <div>
-                                  <p>Marks: {course.ObtainedMarks} Out Of {course.TotalMarks}</p>
+                                  <p>
+                                    Click on certificate to Download
+                                  </p>
                                 </div>
                                 <div>
                                   <Badge
                                     onClick={() => {
-                                      downloadCertificate(course)
+                                      downloadCertificate(course);
                                     }}
                                   >
                                     Certificate
@@ -403,7 +429,9 @@ document.body.appendChild(certDiv);
             <Card className="w-[350px] sm:max-w-350px mx-auto bg-blue-200">
               <CardHeader>
                 <CardTitle>Your Courses</CardTitle>
-                <CardDescription>Only Shown If You Are A Premium User</CardDescription>
+                <CardDescription>
+                  Only Shown If You Are A Premium User
+                </CardDescription>
               </CardHeader>
               <CardContent className="grid gap-4">
                 <div>
