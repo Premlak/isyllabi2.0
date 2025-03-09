@@ -51,7 +51,7 @@ export default function Home() {
       {!loading ? (
         <div className="mt-8">
           {news && (
-            <BackgroundBeamsWithCollision className="min-h-10 max-h-32">
+            <BackgroundBeamsWithCollision className="min-h-10 max-h-40">
               <TextGenerateEffect words={news}/>
             </BackgroundBeamsWithCollision>
           )}
