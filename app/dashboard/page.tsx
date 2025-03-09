@@ -151,7 +151,7 @@ export default function Home() {
       },
     });
     const data = await request.json();
-    toast(data.message);
+    if(data.message != ""){toast(data.message)};
     console.log(data);
     if (!data.flag) {
       router.push("/");
@@ -358,7 +358,7 @@ export default function Home() {
                           {data.user.address}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          Your Delivery Address
+                          Used for placement regarding query
                         </p>
                       </div>
                     </div>
