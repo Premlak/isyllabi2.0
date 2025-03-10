@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
-import { LucideShare2, LockIcon, Grid2x2 } from "lucide-react";
+import { LockIcon} from "lucide-react";
+import { useTheme } from "next-themes";
 import McqView from "@/app/_components/McqView";
 export default function Home({ params }: { params: { id: String } }) {
   const cId = params.id;
@@ -22,6 +23,7 @@ export default function Home({ params }: { params: { id: String } }) {
   const [topic, setTopic] = React.useState("");
   const [prof, setProf]: any = React.useState(null);
   const { user } = useUser();
+  const {theme} = useTheme();
   const [con, setCont] = React.useState("Loading");
   const loadCon = async () => {
     setCont("Loading");
@@ -55,7 +57,7 @@ export default function Home({ params }: { params: { id: String } }) {
     });
     const data = await res.json();
     setCont(
-      `<style>body{background-color: transparent !important;}::-webkit-scrollbar{width: 0;} </style>${data.content[0]?.con} <script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = 'transparent';</script>`
+      `<style>body, * {background-color: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; color: ${theme === "dark" ? "#FFFFFF" : "#000000"} !important;} ::-webkit-scrollbar {width: 0;}</style>${data.content[0]?.con.replace(/<p[^>]*>Powered by.*?<\/p>/g, '').replace(/<a[^>]*Froala Editor[^>]*>(.*?)<\/a>/g, '')} <script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = 'transparent';</script>`
     );
   };
   React.useEffect(() => {
@@ -92,6 +94,7 @@ export default function Home({ params }: { params: { id: String } }) {
   React.useEffect(() => {
     loadCon();
   }, [topic]);
+  React.useEffect(() => { setCont(() => `<style>body, * {background-color: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; color: ${theme === "dark" ? "#FFFFFF" : "#000000"} !important;} ::-webkit-scrollbar {width: 0;}</style>${con}<script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = 'transparent';</script>`); }, [theme]);
   return (
     <div className="flex flex-col h-screen">
       <NavBar />
@@ -312,7 +315,7 @@ export default function Home({ params }: { params: { id: String } }) {
               </div>
             </>
           ) : (
-            <div className="ml-2 mt-8 overflow-hidden overflow-y-auto scrollbar-hide w-full">
+            <div className="ml-2 mt-8 overflow-hidden overflow-y-auto scrollbar-hide w-full bg-white dark:bg-black">
               {cs == false ? (
                 <iframe
                 style={{
@@ -322,9 +325,10 @@ export default function Home({ params }: { params: { id: String } }) {
                   padding: 0,
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
-                  backgroundColor: "transparent",
+                  // backgroundColor: `${theme == "dark" ? "#000000" : "#FFFFFF"}`,
+                  // background: `${theme == "dark" ? "#000000" : "#FFFFFF"}`
                 }}
-                className="m-0 bg-transparent p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden"
+                className={`m-0 p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden`}
                 srcDoc={con}
               />
               ): (<>
@@ -489,7 +493,7 @@ export default function Home({ params }: { params: { id: String } }) {
                   padding: 0,
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
-                  backgroundColor: "transparent",
+                  // backgroundColor: "transparent",
                 }}
                 className="m-0 bg-transparent p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden"
                 srcDoc={con}
