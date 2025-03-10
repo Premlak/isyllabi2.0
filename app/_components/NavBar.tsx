@@ -435,7 +435,7 @@ export default function NavBar() {
                           course.subCourses.map((subCourse: any) => (
                             <div
                               key={subCourse._id}
-                              className="flex-shrink-0 w-64 bg-slate-200 select-none space-y-1 hover:bg-slate-300 dark:hover:bg-gray-900 dark:bg-slate-800 rounded-md p-2 transition-colors shadow-lg"
+                              className="flex-shrink-0 w-64 bg-slate-200 select-none space-y-1 hover:bg-slate-300 dark:hover:bg-gray-900 dark:bg-slate-800 rounded-md p-2 transition-colors shadow-2xl"
                             >
                               <div className="flex items-center">
                                 <Badge>Course:</Badge>
@@ -509,7 +509,7 @@ export default function NavBar() {
               course.it && (
                 <Dialog key={course._id}>
                   <DialogTrigger asChild>
-                    <div className="cursor-pointer w-80 flex-shrink-0 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <div className="cursor-pointer w-80 flex-shrink-0 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-2xl">
                       <Avatar className="m-1">
                         <AvatarImage src={course.img} alt="@shadcn" />
                         <AvatarFallback>Logo</AvatarFallback>
