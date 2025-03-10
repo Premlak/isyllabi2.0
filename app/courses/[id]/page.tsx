@@ -120,7 +120,7 @@ export default function Home({ params }: { params: { id: String } }) {
                             alert("To get certificate, you need to attempt & qualify the follwing exam. Do you want to proceed ?")
                             router.push(`/exams/${cId}`);
                           }else if(user && prof == false){
-                            toast("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
+                            alert("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
                             router.push("/dashboard");
                           }
                         } else {
@@ -364,7 +364,7 @@ export default function Home({ params }: { params: { id: String } }) {
                     alert("To get certificate, you need to attempt & qualify the follwing exam. Do you want to proceed ?")
                     router.push(`/exams/${cId}`);
                   }else if(user && prof == false){
-                    toast("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
+                    alert("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
                     router.push("/dashboard");
                   }
                 } else {
