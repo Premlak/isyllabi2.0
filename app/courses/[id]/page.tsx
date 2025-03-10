@@ -25,6 +25,7 @@ export default function Home({ params }: { params: { id: String } }) {
   const { user } = useUser();
   const {theme} = useTheme();
   const [con, setCont] = React.useState("Loading");
+  const [uTheme, setUTheme] = React.useState(`${theme}`);
   const loadCon = async () => {
     setCont("Loading");
     const getCouser = await fetch("/api/courses", {
@@ -57,7 +58,7 @@ export default function Home({ params }: { params: { id: String } }) {
     });
     const data = await res.json();
     setCont(
-      `<style>body, * {background-color: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; color: ${theme === "dark" ? "#FFFFFF" : "#000000"} !important;} ::-webkit-scrollbar {width: 0;}</style>${data.content[0]?.con.replace(/<p[^>]*>Powered by.*?<\/p>/g, '').replace(/<a[^>]*Froala Editor[^>]*>(.*?)<\/a>/g, '')} <script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = 'transparent';</script>`
+      `<style>body, * {background-color: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; color: ${uTheme === "dark" ? "#FFFFFF" : "#000000"} !important;} ::-webkit-scrollbar {width: 0;}</style>${data.content[0]?.con.replace(/<p[^>]*>\s*Powered by\s*<a[^>]*Froala Editor[^>]*>.*?<\/a>\s*<\/p>/g, '')} <script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = ${uTheme === "dark" ? "#000000" : "#FFFFFF"};</script>`
     );
   };
   React.useEffect(() => {
@@ -94,7 +95,10 @@ export default function Home({ params }: { params: { id: String } }) {
   React.useEffect(() => {
     loadCon();
   }, [topic]);
-  React.useEffect(() => { setCont(() => `<style>body, * {background-color: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${theme === "dark" ? "#000000" : "#FFFFFF"} !important; color: ${theme === "dark" ? "#FFFFFF" : "#000000"} !important;} ::-webkit-scrollbar {width: 0;}</style>${con}<script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = 'transparent';</script>`); }, [theme]);
+  React.useEffect(()=>{
+    setUTheme(`${theme}`);
+    console.log(uTheme);
+  },[theme])
   return (
     <div className="flex flex-col h-screen">
       <NavBar />
@@ -325,10 +329,11 @@ export default function Home({ params }: { params: { id: String } }) {
                   padding: 0,
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
-                  // backgroundColor: `${theme == "dark" ? "#000000" : "#FFFFFF"}`,
-                  // background: `${theme == "dark" ? "#000000" : "#FFFFFF"}`
+                  backgroundColor: `${uTheme == "dark" ? "#000000" : "#FFFFFF"}`,
+                  background: `${uTheme == "dark" ? "#000000" : "#FFFFFF"}`,
+                  color: `${uTheme == "dark" ? "#FFFFFF" : "#000000"}`,
                 }}
-                className={`m-0 p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden`}
+                className={`m-0 p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden ${uTheme === "dark" ? "text-white bg-black" : "text-black"}`}
                 srcDoc={con}
               />
               ): (<>
@@ -493,9 +498,11 @@ export default function Home({ params }: { params: { id: String } }) {
                   padding: 0,
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
-                  // backgroundColor: "transparent",
+                  backgroundColor: `${uTheme == "dark" ? "#000000" : "#FFFFFF"}`,
+                  background: `${uTheme == "dark" ? "#000000" : "#FFFFFF"}`,
+                  color: `${uTheme == "dark" ? "#FFFFFF" : "#000000"}`,
                 }}
-                className="m-0 bg-transparent p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden"
+                className={`m-0 p-0 min-h-screen min-w-full mt-3 overflow-hidden overflow-y-hidden ${uTheme === "dark" ? "text-white bg-black" : "text-black"}`}
                 srcDoc={con}
               />
               ): (<div className="min-w-full">
