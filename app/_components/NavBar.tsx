@@ -245,7 +245,7 @@ export default function NavBar() {
                                   course.subCourses.map((subCourse: any) => (
                                     <AccordionContent
                                       key={subCourse._id}
-                                      className="mt-1 shadow-2xlI"
+                                      className="mt-1 shadow-2xl"
                                     >
                                       <div className="block select-none space-y-1 border-l border-r border-2 hover:bg-slate-200 dark:hover:bg-gray-900 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                         <div className="space-y-1 flex items-center content-center text-center">
