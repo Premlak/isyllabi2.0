@@ -154,7 +154,7 @@ export default function Home() {
                       </Button>
                       <Button onClick={() => {
                         toast('Redirecting ......');
-                        router.push(`/admin/dashbord/courses/${course._id}`)
+                        router.push(`/admin/dashbord/it/${course._id}`)
                       }
                       } variant="default" size="sm" className="m-2">
                         Manage
