@@ -143,7 +143,7 @@ export default function NavBar() {
                                   course.subCourses.map((subCourse: any) => (
                                     <AccordionContent
                                       key={subCourse._id}
-                                      className="mt-1"
+                                      className="mt-1 shadow-2xl"
                                     >
                                        <div style={{minHeight: '109px !important'}} className="border-l border-r border-2 block overflow-hidden select-none space-y-1 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-gray-900 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground max-w-64">
                                         <div className="space-y-1 flex items-center content-center text-center">
@@ -245,7 +245,7 @@ export default function NavBar() {
                                   course.subCourses.map((subCourse: any) => (
                                     <AccordionContent
                                       key={subCourse._id}
-                                      className="mt-1"
+                                      className="mt-1 shadow-2xlI"
                                     >
                                       <div className="block select-none space-y-1 border-l border-r border-2 hover:bg-slate-200 dark:hover:bg-gray-900 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                         <div className="space-y-1 flex items-center content-center text-center">
