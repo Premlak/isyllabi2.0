@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
-import { LockIcon} from "lucide-react";
+import { LockIcon, ShoppingCartIcon} from "lucide-react";
 import { useTheme } from "next-themes";
 import McqView from "@/app/_components/McqView";
 export default function Home({ params }: { params: { id: String } }) {
@@ -36,6 +36,7 @@ export default function Home({ params }: { params: { id: String } }) {
       body: JSON.stringify({ _id: cId }),
     });
     const dataTem = await getCouser.json();
+    console.log(dataTem)
     if (dataTem.course) {
       setExp(dataTem.exp);
       if (dataTem.course.cer == true) {
@@ -107,7 +108,7 @@ export default function Home({ params }: { params: { id: String } }) {
           <ScrollArea className="h-full max-w-xs rounded-md border-none overflow-y-hidden">
             <div className="max-w-xs flex flex-col scrollbar-hide shadow-lg">
               <Button className="-ml-4 bg-blue-300 text-black dark:text-white dark:bg-black dark:hover:bg-black hover:bg-gray-200 shadow-lg" variant={"default"}>
-                &nbsp;Explore Courses
+                &nbsp;Explore Courses{exp && (<span className="shadow-black shadow-lg rounded-xl ml-1.5 flex p-1" onClick={()=>{router.push(`/buycourse/${cId}`); toast("Redirecting")}}><ShoppingCartIcon size={"20"}/></span>)} 
                 {cer ? (
                   <>
                     <Badge
@@ -117,7 +118,7 @@ export default function Home({ params }: { params: { id: String } }) {
                         if (exp == false) {
                           if(user && prof == true){
                             toast("Redirecting.....");
-                            alert("To get certificate, you need to attempt & qualify the follwing exam. Do you want to proceed ?")
+                            alert("To get certificate, you need to attempt & qualify the following exam. Do you want to proceed ?")
                             router.push(`/exams/${cId}`);
                           }else if(user && prof == false){
                             alert("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
@@ -129,7 +130,7 @@ export default function Home({ params }: { params: { id: String } }) {
                         }
                       }}
                     >
-                      Get Certificate
+                      Certificate
                     </Badge>
                   </>
                 ) : (
@@ -353,6 +354,7 @@ export default function Home({ params }: { params: { id: String } }) {
       <div className="hidden max-md:flex w-screen mt-2 mb-2 overflow-hidden scrollbar-hide dark:bg-transparent">
         <div className="grid grid-flow-col border dark:border-transparent pb-3 shadow-lg auto-cols-max gap-4 items-center overflow-x-auto scrollbar-hide">
           <p className="ml-2 shadow-lg bg-blue-300 rounded-lg p-1">Explore Course</p>
+          {exp && (<span className="shadow-black shadow-lg rounded-xl ml-1 flex p-1" onClick={()=>{router.push(`/buycourse/${cId}`); toast("Redirecting")}}><ShoppingCartIcon size={"20"}/></span>)} 
           {cer && (
             <Badge
               variant={"destructive"}
@@ -373,7 +375,7 @@ export default function Home({ params }: { params: { id: String } }) {
                 }
               }}
             >
-              Get Certificate
+              Certificate
             </Badge>
           )}
           {titles.length > 0 ? (
