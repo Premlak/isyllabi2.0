@@ -124,6 +124,9 @@ export default function Home({ params }: { params: { id: String } }) {
                             alert("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
                             router.push("/dashboard");
                           }
+                          if(!user){
+                            toast("Login Required Before Exam Of Certificate");
+                          }
                         } else {
                           toast("Buy or Log-IN to Get Certificate");
                           router.push(`/buycourse/${cId}`);
@@ -368,6 +371,9 @@ export default function Home({ params }: { params: { id: String } }) {
                   }else if(user && prof == false){
                     alert("Completing your profile is required before applying for the certificate. Redirecting to Dashboard for Profile Compilation");
                     router.push("/dashboard");
+                  }
+                  if(!user){
+                    toast("Login Required Before Exam Of Certificate");
                   }
                 } else {
                   toast("Buy or Log-IN to Get Certificate");
