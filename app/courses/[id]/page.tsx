@@ -59,7 +59,7 @@ export default function Home({ params }: { params: { id: String } }) {
     });
     const data = await res.json();
     setCont(
-      `<style>body, * {background-color: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; ::-webkit-scrollbar {width: 0;}</style>${data.content[0]?.con.replace(/<p[^>]*>\s*Powered by\s*<a[^>]*Froala Editor[^>]*>.*?<\/a>\s*<\/p>/g, '')} <script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = ${uTheme === "dark" ? "#000000" : "#FFFFFF"};</script>`
+      `<style>body, * {background-color: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; ::-webkit-scrollbar {width: 0;}</style><div style='margin-bottom: 50px !important;'>${data.content[0]?.con.replace(/<p[^>]*>\s*Powered by\s*<a[^>]*Froala Editor[^>]*>.*?<\/a>\s*<\/p>/g, '')} </div><script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = ${uTheme === "dark" ? "#000000" : "#FFFFFF"};</script>`
     );
   };
   React.useEffect(() => {
@@ -504,6 +504,7 @@ export default function Home({ params }: { params: { id: String } }) {
                   height: "100vh",
                   margin: 0,
                   padding: 0,
+                  paddingBottom: "50px",
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
                   backgroundColor: `${uTheme == "dark" ? "#000000" : "#FFFFFF"}`,
