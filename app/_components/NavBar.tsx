@@ -143,9 +143,9 @@ export default function NavBar() {
                                   course.subCourses.map((subCourse: any) => (
                                     <AccordionContent
                                       key={subCourse._id}
-                                      className="mt-1 shadow-2xl"
+                                      className="mt-1"
                                     >
-                                       <div style={{minHeight: '109px !important'}} className="border-l border-r border-2 block overflow-hidden select-none space-y-1 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-gray-900 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground max-w-64">
+                                       <div style={{minHeight: '109px !important'}} className="border-l border-r border-2 block shadow-2xl shadow-black overflow-hidden select-none space-y-1 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-gray-900 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground max-w-64">
                                         <div className="space-y-1 flex items-center content-center text-center">
                                           <Badge>Course:</Badge>
                                           <h4 className="text-md mb-2 font-medium ml-2 pb-2">
@@ -245,9 +245,9 @@ export default function NavBar() {
                                   course.subCourses.map((subCourse: any) => (
                                     <AccordionContent
                                       key={subCourse._id}
-                                      className="mt-1 shadow-2xl"
+                                      className="mt-1"
                                     >
-                                      <div className="block select-none space-y-1 border-l border-r border-2 hover:bg-slate-200 dark:hover:bg-gray-900 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                                      <div className="block select-none space-y-1 border-l border-r border-2 shadow-2xl shadow-black hover:bg-slate-200 dark:hover:bg-gray-900 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                         <div className="space-y-1 flex items-center content-center text-center">
                                           <Badge>Course:</Badge>
                                           <h4 className="text-md mb-2 font-medium ml-2 pb-2">
@@ -435,7 +435,7 @@ export default function NavBar() {
                           course.subCourses.map((subCourse: any) => (
                             <div
                               key={subCourse._id}
-                              className="flex-shrink-0 w-64 bg-slate-200 select-none space-y-1 hover:bg-slate-300 dark:hover:bg-gray-900 dark:bg-slate-800 rounded-md p-2 transition-colors shadow-2xl"
+                              className="flex-shrink-0 w-64 bg-slate-200 select-none space-y-1 hover:bg-slate-300 dark:hover:bg-gray-900 dark:bg-slate-800 rounded-md p-2 transition-colors"
                             >
                               <div className="flex items-center">
                                 <Badge>Course:</Badge>
@@ -491,7 +491,7 @@ export default function NavBar() {
   onOpenChange={setColl2}
   className="w-full space-y-2 rounded-lg border"
 >
-  <div className="border p-1 flex items-center justify-between space-x-4 px-4 rounded-lg shadow-2xl">
+  <div className="border p-1 flex items-center justify-between space-x-4 px-4 shadow-2xl">
     <h4 className="text-sm font-semibold">Competition Exam</h4>
     <CollapsibleTrigger asChild>
       <Button variant={"ghost"} size={"sm"} className="w-9 p-0">
@@ -502,14 +502,14 @@ export default function NavBar() {
   </div>
   <CollapsibleContent className="space-y-2">
     <div className="w-full overflow-x-auto">
-      <div className="flex space-x-4 flex-nowrap p-2">
+      <div className="flex space-x-4 flex-nowrap">
         {courses.length > 0 &&
           courses.map(
             (course: any) =>
               course.it && (
                 <Dialog key={course._id}>
                   <DialogTrigger asChild>
-                    <div className="cursor-pointer w-80 flex-shrink-0 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-2xl">
+                    <div className="cursor-pointer w-80 flex-shrink-0 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                       <Avatar className="m-1">
                         <AvatarImage src={course.img} alt="@shadcn" />
                         <AvatarFallback>Logo</AvatarFallback>
