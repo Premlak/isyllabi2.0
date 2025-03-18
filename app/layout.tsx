@@ -7,8 +7,8 @@ import { Toaster } from "sonner";
 import { ThemeProvider } from "next-themes";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
-  title: "iSyllabi",
-  description: "Buy Now",
+  title: "जाट विवाह",
+  description: "जाट विवाह"
 };
 export default function RootLayout({
   children,
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey="pk_test_c291bmQtcGlnZW9uLTI5LmNsZXJrLmFjY291bnRzLmRldiQ">
     <html lang="en" suppressHydrationWarning suppressContentEditableWarning>
     <ThemeProvider
         attribute="class"
@@ -24,7 +24,7 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
-      <Toaster position="bottom-center" duration={5000}/>
+      <Toaster position="bottom-center" duration={3000}/>
       <body className={inter.className}>
           <Security />
           {children}
