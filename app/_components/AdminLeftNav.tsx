@@ -6,7 +6,7 @@ import {Sun, Moon} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar";
+import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from "@/components/ui/menubar";
 export default function Nav(){
   const router = useRouter();
   const {setTheme} = useTheme();
@@ -15,22 +15,46 @@ export default function Nav(){
       <div className="flex justify-center align-middle items-center mt-3">
       <Menubar>
       <MenubarMenu>
+        <MenubarTrigger>Main Actions</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem onClick={()=>{toast("Redirecting ......")
+            router.push('/admin/dashbord')}}>
+            Courses
+          </MenubarItem>
+          <MenubarSeparator />
+          {/* <MenubarItem onClick={()=>{
+            toast("Redirecting ......")
+            router.push('/admin/dashbord/books')}}>
+            Books
+          </MenubarItem> */}
+          <MenubarSeparator />
+          <MenubarItem onClick={()=>{toast("Redirecting ......")
+            router.push('/admin/dashbord/it')}}>
+            Internship & Traning
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
         <MenubarTrigger>User Actions</MenubarTrigger>
         <MenubarContent>
         <MenubarItem onClick={()=>{toast("Redirecting ......")
             router.push('/admin/dashbord/buyforce')}}>
-              Add MemberShip
+              Force Buy Course
           </MenubarItem>
           <MenubarSeparator />
           <MenubarItem onClick={()=>{toast("Redirecting ......")
             router.push('/admin/dashbord/cerHis')}}>
-              Users
+              Certificate History
           </MenubarItem>
           <MenubarItem onClick={()=>{toast("Redirecting ......")
             router.push('/admin/dashbord/hmn')}}>
               Home Page News
           </MenubarItem>
           <MenubarSeparator />
+          <MenubarItem onClick={()=>{toast("Redirecting ......")
+            router.push('/admin/dashbord/hm')}}>
+              Home Page Images
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

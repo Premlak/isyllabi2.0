@@ -5,14 +5,15 @@ const razorpay = new Razorpay({
     key_secret: process.env.RAZORPAY_SECRET_KEY,
 });
 export async function POST(req: NextRequest){
+    const data = await req.json();
     try{
         const order = await razorpay.orders.create({
-            amount: 300 * 100,
+            amount: data.ammount * 100,
             currency: "INR",
             receipt: "Course Purchased",
         });
         return NextResponse.json({orderId: order.id});
     }catch(e){
-        
+        console.log(e);
     }
 }

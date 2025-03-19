@@ -1,110 +1,61 @@
 "use client";
-import React, { useState } from "react";
-import Tesseract from "tesseract.js";
-import { SingleImageDropzone } from "@/app/_components/image-upload";
 
-const ImageAnalyzer = () => {
-  const [message, setMessage] = useState("");
-  const [file, setFile] = useState<null | File>(null);
+import { useRef } from "react";
+import html2canvas from "html2canvas";
 
-  // Preprocess image before text detection
-  const preprocessImage = (file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d")!;
-        canvas.width = img.width;
-        canvas.height = img.height;
+const Certificate = () => {
+  const certificateRef = useRef<HTMLDivElement>(null);
 
-        // Convert to grayscale & enhance contrast
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        let data = imageData.data;
-
-        for (let i = 0; i < data.length; i += 4) {
-          let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-          if (avg > 180) {
-            data[i] = data[i + 1] = data[i + 2] = 255; // Light → White
-          } else if (avg < 80) {
-            data[i] = data[i + 1] = data[i + 2] = 0; // Dark → Black
-          } else {
-            data[i] = data[i + 1] = data[i + 2] = avg * 1.3; // Boost contrast
-          }
-        }
-
-        ctx.putImageData(imageData, 0, 0);
-        resolve(canvas.toDataURL());
-      };
-    });
-  };
-
-  // Analyze image for text detection
-  const analyzeImage = async (file: File) => {
-    console.log("🔍 Analyzing image...");
-    setMessage("🔍 Processing image...");
-
-    try {
-      const processedImage = await preprocessImage(file);
-      const { data } = await Tesseract.recognize(processedImage, "eng");
-
-      if (!data.words || data.words.length === 0) {
-        console.log("✅ No text detected.");
-        setMessage("✅ No text detected. Image accepted.");
-        return;
+  const downloadAsImage = async () => {
+    if (certificateRef.current) {
+      try {
+        const canvas = await html2canvas(certificateRef.current, { useCORS: true });
+        const imgData = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = imgData;
+        link.download = "certificate.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error("Error capturing the certificate:", error);
       }
-
-      let detectedText = [];
-      let highestWordSize = 0; // Track max detected font size
-      let textConfidence = data.confidence || 0; // Overall confidence
-
-      data.words.forEach((word) => {
-        if (!word.bbox) return; // Ensure bbox exists
-
-        const wordHeight = word.bbox.y1 - word.bbox.y0; // Height of detected word
-        highestWordSize = Math.max(highestWordSize, wordHeight);
-
-        console.log(`📝 Word: "${word.text}", Size: ${wordHeight}, Confidence: ${word.confidence}`);
-
-        // ✅ Reject if readable text (size 10+)
-        if (wordHeight >= 10) {
-          detectedText.push(word.text);
-        }
-      });
-
-      let extractedText = detectedText.join(" ");
-      console.log("📌 Filtered Text:", extractedText);
-      console.log("🔎 Highest Word Size:", highestWordSize);
-      console.log("🟢 Confidence Level:", textConfidence);
-
-      // ✅ Reject image if readable text exists (size 10+)
-      if (highestWordSize >= 10 && textConfidence > 50) {
-        console.log("❌ Text detected. Rejecting image.");
-        setMessage("❌ Image contains text. Upload a clean image.");
-        setFile(null);
-      } else {
-        console.log("✅ No readable text detected. Image accepted.");
-        setMessage("✅ No text detected. Image accepted.");
-      }
-    } catch (error) {
-      console.error("⚠ Error processing image:", error);
-      setMessage("⚠ Error analyzing image.");
     }
   };
 
   return (
-    <div>
-      <SingleImageDropzone
-        value={file}
-        onChange={(newFile) => {
-          setFile(newFile);
-          if (newFile) analyzeImage(newFile);
-        }}
-      />
-      <p>{message}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-100 p-6">
+      <div
+        ref={certificateRef}
+        className="relative p-12 bg-white rounded-lg shadow-xl text-center w-full max-w-3xl border border-gray-300"
+      >
+        <div className="absolute top-4 right-4 w-20 h-20 bg-yellow-500 rounded-full border-4 border-white flex items-center justify-center shadow-md">
+          <span className="text-white text-xl font-bold">🏅</span>
+        </div>
+        <h1 className="text-4xl font-bold text-gray-900">CERTIFICATE OF INTERNSHIP</h1>
+        <p className="text-lg mt-6 text-gray-600">This internship program certificate is proudly awarded to</p>
+        <h2 className="text-3xl font-semibold text-blue-600 mt-4">Drew Feig</h2>
+        <hr className="w-3/4 mx-auto my-4 border-gray-400" />
+        <p className="text-lg mt-6 text-gray-700">For outstanding completion of the compulsory internship program at iSyllabi  </p> 
+        <div className="flex justify-between mt-12 text-gray-800 text-lg">
+          <div className="text-left">
+            <p className="">Avery Davis</p>
+            <p className="font-semibold">CEO</p>
+          </div>
+          <div className="text-right">
+            <p className="">Reese Miller</p>
+            <p className="font-semibold">Program Manager</p>
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={downloadAsImage}
+        className="mt-8 px-6 py-3 bg-blue-500 text-white rounded-lg text-lg hover:bg-blue-600"
+      >
+        Download as Image
+      </button>
     </div>
   );
 };
 
-export default ImageAnalyzer;
+export default Certificate;
