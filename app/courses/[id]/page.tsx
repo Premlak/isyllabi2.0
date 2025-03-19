@@ -59,7 +59,7 @@ export default function Home({ params }: { params: { id: String } }) {
     });
     const data = await res.json();
     setCont(
-      `<style>body, * {background-color: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; ::-webkit-scrollbar {width: 0;}</style><div style='margin-bottom: 50px !important; @media (min-width: 500px) { display: flex !important; flex-direction: column !important; align-items: center !important; }'>${data.content[0]?.con.replace(/<p[^>]*>\s*Powered by\s*<a[^>]*Froala Editor[^>]*>.*?<\/a>\s*<\/p>/g, '')} </div><script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = ${uTheme === "dark" ? "#000000" : "#FFFFFF"};</script>`
+      `<style>@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');</style><style>body, * {background-color: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; background: ${uTheme === "dark" ? "#000000" : "#FFFFFF"} !important; ::-webkit-scrollbar {width: 0;}</style><div style='margin-bottom: 50px !important;' class="flex flex-col items-center justify-center">${data.content[0]?.con.replace(/<p[^>]*>\s*Powered by\s*<a[^>]*Froala Editor[^>]*>.*?<\/a>\s*<\/p>/g, '')} </div><script>document.addEventListener('selectstart', (e) => e.preventDefault());document.addEventListener('mousedown', (e) => e.preventDefault()); document.body.style.backgroundColor = ${uTheme === "dark" ? "#000000" : "#FFFFFF"};</script>`
     );
   };
   React.useEffect(() => {
