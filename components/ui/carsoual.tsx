@@ -35,6 +35,7 @@ interface CarouselProps {
 export default function Carousel({ slides }: CarouselProps) {
   const [current, setCurrent] = useState(0);
 
+  // Automatically update the slide every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prevCurrent) => (prevCurrent + 1) % slides.length);
@@ -54,11 +55,11 @@ export default function Carousel({ slides }: CarouselProps) {
   };
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[50vh] lg:h-[70vh] overflow-hidden">
+    <div className="relative w-full h-[60vh] md:h-[50vh] lg:h-[70vh] overflow-hidden z-[1]">
       {slides.map((slide, index) => (
         <div
           key={index}
-          className="inset-0 w-full h-full transition-opacity duration-1000"
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000`}
           style={{
             opacity: current === index ? 1 : 0,
             zIndex: current === index ? 10 : 0,
@@ -68,15 +69,15 @@ export default function Carousel({ slides }: CarouselProps) {
             className="w-full h-full object-fill"
             style={{
               objectPosition: "center",
-              objectFit: "contain"
+              // objectFit: "contain",
             }}
             src={slide.src || "/placeholder.svg"}
-            alt=""
+            alt={`Slide ${index}`}
             loading="eager"
           />
         </div>
       ))}
-      <div className="absolute flex justify-center w-full bottom-4 z-1">
+      <div className="absolute flex justify-center w-full bottom-4 z-20">
         <CarouselControl
           type="previous"
           title="Go to previous slide"
@@ -91,3 +92,18 @@ export default function Carousel({ slides }: CarouselProps) {
     </div>
   );
 }
+const Navbar = () => {
+  return (
+    <div className="fixed top-0 w-full h-16 bg-neutral-800 text-white z-[100] flex items-center justify-center">
+      Navbar Content
+    </div>
+  );
+};
+const App = ({ slides }: { slides: SlideData[] }) => {
+  return (
+    <div className="relative">
+      <Navbar />
+      <Carousel slides={slides} />
+    </div>
+  );
+};
