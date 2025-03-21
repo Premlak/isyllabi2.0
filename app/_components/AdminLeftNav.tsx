@@ -55,6 +55,11 @@ export default function Nav(){
             router.push('/admin/dashbord/hm')}}>
               Home Page Images
           </MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem onClick={()=>{toast("Redirecting ......")
+            router.push('/admin/dashbord/hmb')}}>
+              Home Page Banner
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

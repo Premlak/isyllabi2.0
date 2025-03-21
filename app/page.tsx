@@ -4,16 +4,19 @@ import NavBar from "./_components/NavBar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Facebook, Youtube, Linkedin, Instagram } from "lucide-react";
 import { AnimatedTestimonials } from "@/components/ui/animatedTestinomals";
+import Carousel from "@/components/ui/carsoual";
 import { TextGenerateEffect } from "@/components/ui/textGenration";
 import { BackgroundBeamsWithCollision } from "@/components/ui/backgroundBeamWithCollicison";
 export default function Home() {
   const [data, setData]: any = useState([]);
   const [news, setNews]: any = useState();
   const [loading, setLoading] = useState(true);
+  const [banner, setBanner]: any = React.useState([]);
   async function fetchData() {
     try {
       const res = await fetch("/api/image", { method: "GET" });
       const data1 = await res.json();
+      console.log(data1)
       if (data1.news?.news) {
         setNews(data1.news.news);
       }
@@ -26,9 +29,13 @@ export default function Home() {
         }));
         setData(formattedTestimonials);
       }
-      setTimeout(() => {
-        console.log(data);
-      }, 2000);
+      if(data1.banner){
+        const formattedFormatedBanner = data1.banner.map((item: any) => ({
+          src: item.src,
+        }));
+        setBanner(formattedFormatedBanner);
+      }
+      
     } catch (error) {
       console.error("Error fetching images:", error);
     } finally {
@@ -45,15 +52,15 @@ export default function Home() {
       <div>
         <NavBar />
       </div>
-      <div className="mt-4 text-md font-serif flex justify-center items-end p-3">
-        <h1>A step towards skilled <strong className="text-red-800">Bharat</strong>: An online platform for skilled courses & internship programs </h1>
-      </div>
       {!loading ? (
         <div className="mt-8">
           {news && (
+            <>
             <BackgroundBeamsWithCollision className="min-h-10 max-h-40">
               <TextGenerateEffect words={news}/>
             </BackgroundBeamsWithCollision>
+              <Carousel slides={banner}/>
+            </>
           )}
           {data.length > 0 && <AnimatedTestimonials testimonials={data}/>}
         </div>
