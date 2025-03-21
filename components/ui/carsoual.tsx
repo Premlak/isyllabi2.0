@@ -58,7 +58,7 @@ export default function Carousel({ slides }: CarouselProps) {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className="absolute inset-0 w-full h-full transition-opacity duration-1000"
+          className="inset-0 w-full h-full transition-opacity duration-1000"
           style={{
             opacity: current === index ? 1 : 0,
             zIndex: current === index ? 10 : 0,
@@ -68,7 +68,7 @@ export default function Carousel({ slides }: CarouselProps) {
             className="w-full h-full object-fill"
             style={{
               objectPosition: "center",
-              // objectFit: "contain"
+              objectFit: "contain"
             }}
             src={slide.src || "/placeholder.svg"}
             alt=""
@@ -76,7 +76,7 @@ export default function Carousel({ slides }: CarouselProps) {
           />
         </div>
       ))}
-      <div className="absolute flex justify-center w-full bottom-4">
+      <div className="absolute flex justify-center w-full bottom-4 z-1">
         <CarouselControl
           type="previous"
           title="Go to previous slide"
