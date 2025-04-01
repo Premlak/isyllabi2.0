@@ -246,11 +246,13 @@ export default function Home() {
                               );
                               e.target.value = "";
                             } else {
-                              const formattedDate = selectedDate
-                                .toLocaleDateString("en-GB")
-                                .split("/")
-                                .join("-");
-                              setM(formattedDate);
+                              // const formattedDate = selectedDate
+                              //   .toLocaleDateString("en-GB")
+                              //   .split("/")
+                              //   .join("-");
+                              // setM(formattedDate);
+                              const formattedDate = selectedDate.toLocaleDateString("en-GB").replace(/\//g, "-");
+                            setM(formattedDate);
                             }
                           }}
                           placeholder="Enter Training Starting Date"
