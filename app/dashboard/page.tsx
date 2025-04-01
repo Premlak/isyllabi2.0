@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { Calendar } from "@/components/ui/calendar";
 import NavBar from "../_components/NavBar";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -35,7 +36,7 @@ export default function Home() {
   const [name, setName] = React.useState("");
   const [f, setF] = React.useState("");
   const [dis, setDis] = React.useState(false);
-  const [m, setM] = React.useState("");
+  const [m, setM] = React.useState<any>("");
   const [i, setI] = React.useState("");
   const [a, setA] = React.useState("");
   const downloadCertificate = (course: any) => {
@@ -231,32 +232,14 @@ export default function Home() {
                           placeholder="Enter Your Father Name"
                         />
                       </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">
-                          Training Start From
-                        </Label>
-                        <Input
-                          type="date"
-                          onChange={(e) => {
-                            const selectedDate = new Date(e.target.value);
-                            const today = new Date();
-                            if (selectedDate > today) {
-                              toast(
-                                "Please select a date that is not in the future."
-                              );
-                              e.target.value = "";
-                            } else {
-                              // const formattedDate = selectedDate
-                              //   .toLocaleDateString("en-GB")
-                              //   .split("/")
-                              //   .join("-");
-                              // setM(formattedDate);
-                              const formattedDate = selectedDate.toLocaleDateString("en-GB").replace(/\//g, "-");
-                            setM(formattedDate);
-                            }
-                          }}
-                          placeholder="Enter Training Starting Date"
-                        />
+                      <div className="flex flex-col justify-center items-center w-full">
+                      <Label className="text-right mb-3">Traning Starting Date</Label>
+                        <Calendar
+    mode="single"
+    selected={m}
+    onSelect={setM}
+    className="rounded-md border z-10"
+  />
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right">
